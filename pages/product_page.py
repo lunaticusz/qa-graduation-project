@@ -28,3 +28,11 @@ class ProductPage(BasePage):
         price_in_product_info = self.get_element_text(*ProductPageLocators.PRICE_IN_PRODUCT_INFO)
         price_in_success_message = self.get_element_text(*ProductPageLocators.PRICE_IN_SUCCESS_MESSAGE)
         assert price_in_product_info == price_in_success_message, "Product price is not correct in success message"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.TITLE_IN_SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def should_success_message_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.TITLE_IN_SUCCESS_MESSAGE), \
+            "Success message is not disappeared, but should be"
