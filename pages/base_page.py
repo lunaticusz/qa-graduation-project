@@ -3,7 +3,7 @@ from selenium.common.exceptions import NoSuchElementException, NoAlertPresentExc
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-from pages.locators import BasePageLocators
+from pages.locators import BasePageLocators, BasketPageLocators
 
 
 class BasePage():
@@ -65,3 +65,16 @@ class BasePage():
 
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
+    def go_to_basket_page(self):
+        self.should_be_link_view_basket()
+        link = self.browser.find_element(*BasketPageLocators.HEADER_LINK)
+        link.click()
+        self.should_be_basket_title()
+
+    def should_be_link_view_basket(self):
+        assert self.is_element_present(*BasketPageLocators.HEADER_LINK), "Link 'View basket' is not presented"
+
+    def should_be_basket_title(self):
+        page_title = self.get_element_text(*BasketPageLocators.BASKET_TITLE)
+        assert page_title == 'Basket', "Basket page title is not correct"
