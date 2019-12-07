@@ -8,7 +8,6 @@ class BasePageLocators():
 
 
 class MainPageLocators():
-    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     MAIN_PAGE_URL = "http://selenium1py.pythonanywhere.com/"
 
 
@@ -28,10 +27,10 @@ class ProductPageLocators():
     TITLE_IN_SUCCESS_MESSAGE = (By.CSS_SELECTOR, "#messages > .alert-success:nth-child(1) strong")
     PRICE_IN_PRODUCT_INFO = (By.CSS_SELECTOR, ".product_main .price_color")
     PRICE_IN_SUCCESS_MESSAGE = (By.CSS_SELECTOR, "#messages .alert-info strong")
+    PRODUCT_PROMO_LINK = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
 
 
 class BasketPageLocators():
-    BASKET_URL = 'http://selenium1py.pythonanywhere.com/en-gb/basket/'
     HEADER_LINK = (By.CSS_SELECTOR, ".basket-mini a.btn")
     BASKET_TITLE = (By.CSS_SELECTOR, ".page-header h1")
     BASKET_ITEMS_FORM = (By.ID, "basket_formset")
