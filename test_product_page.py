@@ -1,6 +1,7 @@
+import time
 import pytest
 from pages.basket_page import BasketPage
-from pages.locators import BasePageLocators
+from pages.locators import BasePageLocators, LoginPageLocators
 from pages.login_page import LoginPage
 from pages.product_page import ProductPage
 
@@ -81,3 +82,30 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
 
     # Ожидаем, что есть текст о том что корзина пуста
     basket_page.should_be_empty_basket_message()
+
+
+class TestUserAddToBasketFromProductPage():
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        login_page = LoginPage(browser, LoginPageLocators.LOGIN_URL)
+        login_page.open()
+        login_page.should_be_login_page()
+
+        email = str(time.time()) + "@fakemail.org"
+        password = "F34SEsesc#2"
+        login_page.register_new_user(email, password)
+        login_page.should_be_authorized_user()
+
+    def test_user_cant_see_success_message(self, browser):
+        # Открываем страницу товара
+        page = ProductPage(browser, PRODUCT_LINK)
+        page.open()
+
+        # Проверяем, что нет сообщения об успехе с помощью is_not_element_present
+        page.should_not_be_success_message()
+
+    def test_user_can_add_product_to_basket(self, browser):
+        page = ProductPage(browser, PRODUCT_LINK)
+        page.open()
+        page.add_to_cart()
+        page.should_be_added_to_cart()

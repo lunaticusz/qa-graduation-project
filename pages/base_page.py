@@ -28,6 +28,12 @@ class BasePage():
         except (NoSuchElementException):
             return False
 
+    def get_element(self, how, what):
+        try:
+            return self.browser.find_element(how, what)
+        except (NoSuchElementException):
+            return False
+
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]
@@ -78,3 +84,7 @@ class BasePage():
     def should_be_basket_title(self):
         page_title = self.get_element_text(*BasketPageLocators.BASKET_TITLE)
         assert page_title == 'Basket', "Basket page title is not correct"
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"
