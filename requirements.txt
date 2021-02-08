@@ -10,7 +10,7 @@ command-not-found==0.3
 configobj==5.0.6
 cupshelpers==1.0
 defer==1.0.6
-httplib2==0.11.3
+httplib2==0.19.0
 idna==2.6
 importlib-metadata==0.23
 louis==3.5.0
